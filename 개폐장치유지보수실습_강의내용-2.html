@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>개폐장치 유지보수 실습 - 강의 내용</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #f4f6f9;
+    color: #1a1a2e;
+    padding: 30px 20px;
+    line-height: 1.8;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  h1.main-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a3a6e;
+    border-bottom: 4px solid #3a6fdb;
+    padding-bottom: 16px;
+    margin-bottom: 40px;
+  }
+
+  .section {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px 36px;
+    margin-bottom: 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    border-left: 5px solid #3a6fdb;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1a3a6e;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e0e7f3;
+  }
+
+  .sub-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #2a5abf;
+    margin: 18px 0 10px 0;
+  }
+
+  .sub-sub-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin: 14px 0 6px 0;
+  }
+
+  p { margin-bottom: 8px; }
+
+  ul {
+    padding-left: 22px;
+    margin-bottom: 8px;
+  }
+
+  ul li {
+    margin-bottom: 6px;
+  }
+
+  .indent { padding-left: 20px; }
+  .indent2 { padding-left: 40px; }
+
+  .red { color: #cc0000; font-weight: 500; }
+
+  .note {
+    background: #f0f4ff;
+    border-left: 3px solid #3a6fdb;
+    padding: 8px 14px;
+    margin: 8px 0 8px 0;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    color: #333;
+  }
+
+  .highlight-box {
+    background: #fff8e1;
+    border: 1px solid #f0c040;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 10px 0;
+    font-size: 0.97rem;
+  }
+
+  /* Table styles */
+  .table-wrap {
+    width: 100%;
+    margin: 16px 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+    table-layout: fixed;
+  }
+
+  th {
+    background: #1a3a6e;
+    color: #fff;
+    padding: 7px 5px;
+    text-align: center;
+    font-weight: 600;
+    border: 1px solid #3a6fdb;
+    word-break: keep-all;
+    line-height: 1.4;
+  }
+
+  td {
+    padding: 7px 5px;
+    border: 1px solid #c8d5ea;
+    text-align: center;
+    vertical-align: middle;
+    color: #222;
+    word-break: keep-all;
+    line-height: 1.5;
+  }
+
+  tr:nth-child(even) td { background: #f0f4fb; }
+  tr:nth-child(odd) td { background: #fff; }
+
+  .formula {
+    font-family: 'Courier New', monospace;
+    background: #f4f6f9;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 0.97rem;
+    display: inline-block;
+    margin: 4px 0;
+  }
+
+  .badge {
+    display: inline-block;
+    background: #3a6fdb;
+    color: #fff;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    text-align: center;
+    line-height: 22px;
+    font-size: 0.82rem;
+    margin-right: 6px;
+    font-weight: 700;
+  }
+
+  .step-box {
+    background: #f9f9ff;
+    border: 1px solid #c8d5ea;
+    border-radius: 6px;
+    padding: 10px 16px;
+    margin: 8px 0;
+  }
+
+  footer {
+    text-align: center;
+    color: #888;
+    font-size: 0.88rem;
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid #ddd;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1 class="main-title">개폐기 유지 보수 실습 강의 내용</h1>
+
+  <!-- ======================== SECTION 1 ======================== -->
+  <div class="section">
+    <div class="section-title">1. NCS — 개폐기 유지 보수</div>
+
+    <div class="sub-title">개폐기(Switchgear)란?</div>
+    <p>전기 회로를 수동 또는 자동으로 연결(On) 하거나 차단(OFF)하여 전력 기기를 제어하고, 보호하는 장치</p>
+
+    <div class="sub-title">주요 기능</div>
+    <ul>
+      <li><strong>회로의 연결 및 차단 (부하 개폐)</strong> : 일반적인 부하 상태에서 회로를 수동 또는 자동으로 개폐하여 전기기기의 기동 및 정지</li>
+      <li><strong>전력 기기 보호</strong> : 전동기, 변압기 등 전력 설비의 과부하, 단락, 구속 등으로 인한 과전류 발생 시 회로를 차단하여 설비 보호</li>
+      <li><strong>고장 구간 분리 (ASS/AISS)</strong> : 특고압 수전설비에서 사고 발생 시, 고장 구간을 자동으로 분리하여 정전 구간을 최소화</li>
+      <li><strong>안전한 유지 보수 (단로기)</strong> : 전로를 확실하게 분리하여 작업자가 안전하게 검사하거나 수리 할 수 있는 환경 제공</li>
+      <li><strong>수전 인입점 제어</strong> : 전력 공급측(한전)과 수용가 설비의 경계점에서 전기를 공급받거나 끊는 역할</li>
+    </ul>
+
+    <div class="sub-title">개폐기기의 구분</div>
+    <div class="table-wrap"><table>
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>단로기 (Disconnection Switch)</th>
+          <th>차단기 (Circuit Breaker)</th>
+          <th>개폐기 (Switch)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>주목적</strong></td>
+          <td>기기 유지 보수 시 무부하로 회로 분리</td>
+          <td>고장/부하 전류 차단 (보호)</td>
+          <td>부하 전류 개폐</td>
+        </tr>
+        <tr>
+          <td><strong>개폐 능력</strong></td>
+          <td>무부하 (충전 전류 제외)만 가능</td>
+          <td>부하 전류 및 고장 전류 가능</td>
+          <td>부하 전류 가능</td>
+        </tr>
+        <tr>
+          <td><strong>아크 소호</strong></td>
+          <td>없음 (가시적 절단)</td>
+          <td>있음 (내부 소호실)</td>
+          <td>일반적으로 없음<br>(특수한 경우 있을 수도 있음)</td>
+        </tr>
+        <tr>
+          <td><strong>작동 방식</strong></td>
+          <td>수동/자동 (차단기 개방 후)</td>
+          <td>자동 (보호계전기 연동)</td>
+          <td>수동 또는 자동</td>
+        </tr>
+      </tbody>
+    </table></div>
+
+    <p style="margin-top:8px; font-size:0.9rem; color:#555;">
+      대표 기기 예시: <strong>GIS (Gas Insulated Switchgear)</strong> / <strong>ASS (Automatic Section Switch)</strong> / <strong>VI (Vacuum Interrupter)</strong>
+    </p>
+  </div>
+
+  <!-- ======================== SECTION 2 ======================== -->
+  <div class="section">
+    <div class="section-title">2. 전기 재해의 이해</div>
+
+    <!-- 트래킹 -->
+    <div class="sub-title">열화 현상에 따른 열화 원인 ① 트래킹 (Tracking)</div>
+    <p>전위차가 있는 도체 간의 절연체 표면에 탄화 도전로가 형성되어 절연이 파괴되는 현상</p>
+    <div class="note">절연물 표면상에 전해질의 오손물이 없어도 표면 부근의 기중 방전의 결과로 탄화 도전로를 형성하는 것.</div>
+
+    <div class="sub-sub-title">트래킹 4단계 진행 과정</div>
+    <div class="step-box">
+      <p><span class="badge">1</span><strong>단계</strong> : 절연 재료 표면의 오염 (습기, 염분, 섬유질 또는 도전성 물질 등에 의해 절연체 표면의 오염)</p>
+    </div>
+    <div class="step-box">
+      <p><span class="badge">2</span><strong>단계</strong> : 누설 전류 및 발열 및 <span class="red">미소발광방전</span>의 발생 (절연체의 오염 부분을 통해 누설전류가 흐르고 줄 열이 발생 및 방전) → <span class="red">부분방전</span></p>
+    </div>
+    <div class="step-box">
+      <p><span class="badge">3</span><strong>단계</strong> : 줄 열 및 방전에 의한 표면의 탄화<br>
+      <span class="indent">(미소 발광 방전이 반복적으로 계속되면 열 에너지에 의해 절연재 표면이 탄화되어 탄화 도전로 형성)</span></p>
+    </div>
+    <div class="step-box">
+      <p><span class="badge">4</span><strong>단계</strong> : 가연물의 착화 : 탄화 도전로에서 아크가 발생하는 경우 고온의 열 에너지에 의해 주위 가연물 착화</p>
+    </div>
+
+    <!-- 트리잉 -->
+    <div class="sub-title">열화 현상에 따른 열화 원인 ② 트리잉 (Treeing)</div>
+    <p>고체 절연물 속에서 나오는 나뭇가지 모양의 방전 흔적을 남기는 절연 열화 현상</p>
+
+    <ul>
+      <li><strong>수 트리 (Water Tree)</strong> : 절연체 내에서 수분이 침투되면 수분은 이온화되고 이 이온에 교번 자계가 가해져서 진동이 발생되어 절연체에 틈을 만든다.</li>
+      <li><strong>전기적 트리 (Electrical Tree)</strong> : 절연체 내부의 공극(Void) 이물질, 반도전층의 돌기 등에 발생, 절연체 내부에 공극이나 이물질, 돌기 등이 존재하면 부분 방전에 의한 전기적 트기가 가속되어 절연이 파괴됨.</li>
+      <li><strong>화학적 트리 (Chemical Tree)</strong> : 케이블이 설치된 토양 등에 함유된 화학적 성분이 케이블 시스 층 및 절연체를 투과하여 도체에 도달, 도체 재료와 반응하고 이 때 생성된 반응 물질이 절연체 내부에 나뭇가지 모양으로 진전되어 절연이 파괴되는 현상</li>
+    </ul>
+
+    <!-- 과전류 -->
+    <div class="sub-title">과전류 (과부하전류 + 단락전류)에 의한 재해</div>
+
+    <div class="sub-sub-title">과전류의 개념</div>
+    <p>전기기기 또는 전선에서 정하고 있는 허용전류 값 이상의 전류가 흐르는 것.</p>
+
+    <div class="sub-sub-title">과전류에 의한 발열 메커니즘</div>
+    <p>전선에 전류가 흐르면 Joule의 법칙에 의해 발열이 생기게 되며 이 때 정격 전류를 초과하는 과전류가 발생하여 발열과 방열의 평형이 깨지며 과열 발생.</p>
+    <div class="note">
+      <strong>Joule Heating</strong> : 도체에 전류가 흘 때 발생하는 열 &nbsp;&nbsp;
+      <span class="formula">E = P(w) × t(s) = I² × R × t(s)</span><br>
+      비닐절연전선의 경우 정격 전류의 200~300%의 과전류에 피복이 변질, 변형되고 500~600%에서 붉게 열이 난 후 용융하게 된다.
+    </div>
+
+    <div class="sub-sub-title">과부하 전류의 주요 원인</div>
+    <ul>
+      <li>정상 허용전류에 비하여 과전류가 흐르면서 과열되어 출화</li>
+      <li>전원공급설비의 정격용량을 고려하지 않고 대용량 기기 설치 시 배선이나 접속기기에 과열</li>
+      <li>차단기 용량이 배선이나 부하 용량에 비해 과대한 것을 설치</li>
+      <li>이동이 빈번한 전기기기의 배선의 손상에 의한 국부적인 발열, 출화</li>
+      <li>문어발식 전기기기의 연결에 의한 과부하에 의한 배선 및 발열에 의한 출화</li>
+    </ul>
+
+    <!-- 단락 전류의 종류 -->
+    <div class="sub-title">단락 전류의 종류</div>
+    <ul>
+      <li><strong>대칭(symmetrical) 단락 전류 I(rms)sym</strong> : 교류분과 직류분으로 구성된 단락 전류에서 교류분 실효치로 표시하는 단락 전류</li>
+      <li><strong>최대 비대칭(asymmetrical) 단락 전류 I(rms)asym</strong> : 직류분을 포함한 실효치로 표시되는 단락 전류로 실효치가 최대로 되는 투입 위상에 따른 비대칭 단락전류 실효치<br>
+        <span class="formula">I(rms)asym = α I(rms)sym</span>
+      </li>
+      <li><strong>3상 평균 비대칭(asymmetrical) 단락 전류 I(rms)ave</strong> : 3상 회로에서 비대칭 단락전류는 각 상의 투입 위상에 따라 직류분 함유율이 다르기 때문에 각 상의 비대칭 실효치의 평균을 취한 값으로 그 계통의 단락 전류를 표시<br>
+        <span class="formula">I(rms)ave = β I(rms)sym</span>
+      </li>
+      <li><strong>최대 비대칭(asymmetrical) 단락 전류 순시치 Imax</strong><br>
+        <span class="formula">I(rms)ave = γI(rms)sym</span>
+      </li>
+    </ul>
+
+    <!-- 배선용 차단기의 협조 -->
+    <div class="sub-title">배선용 차단기의 협조</div>
+    <p>일반적으로 저압 계통에서 단락보호협조 방식으로 선택차단방식(Selective System)과 캐스캐이딩(Cascade System) 방식이 있고, 부하의 내용, 성질에 따라 시스템을 조합하여 경제적이고 신뢰성 높은 저압 배전 보호 시스템을 구축할 수 있다.</p>
+    <ul>
+      <li><strong>선택 차단 방식</strong> : MCCB 1과 MCCB 3의 트립 특성 곡선이 분리되어, 고장 발생 시 고장 구간에 가장 가까운 차단기(MCCB 3)만 차단됨.</li>
+      <li><strong>캐스캐이딩 차단방식</strong> : MCCB 1의 트립 특성 곡선이 MCCB 3과 겹쳐, 대전류 단락 시 MCCB 1과 MCCB 3이 동시에 차단될 수 있음.</li>
+    </ul>
+
+    <!-- 감전 보호 절연 -->
+    <div class="sub-title">감전에 대한 보호 — 절연</div>
+    <ol>
+      <li style="margin-bottom:6px;"><strong>절연 (Isolation)</strong> : 시스템 내 분리된 부품 간 원하는 신호나 전력은 전달하면서 원치 않은 전류를 차단하는 것.</li>
+      <li style="margin-bottom:6px;"><strong>기능절연 (Functional Isolation)</strong> : 단순한 절연 기능만을 제공, 전위가 다른 시스템들 간 신호나 전력만 전달할 뿐, 전기적 충격에 대한 보호는 제공하지 않음.</li>
+      <li style="margin-bottom:6px;"><strong>기본절연 (Basic Isolation)</strong> : 기능 절연에 전기적 충격에 대한 보호 기능을 추가<br>
+        <span class="indent">class Ⅰ : 디바이스는 기능 절연에 접지를 접속하여 사용자 보호</span>
+      </li>
+      <li style="margin-bottom:6px;"><strong>이중 절연 (Double Isolation)</strong> : 기본 절연은 전격에 대한 기본 수준의 보호기능만을 제공하기 때문에 기본 절연 실패 시 전격 가능성을 낮추기 위해 충전부와 소비자간 보호 절연층을 추가<br>
+        <span class="indent">class Ⅱ 제품은 이중 절연 필요, 접지금속판이 없는 AC 플러그를 사용해 제조되며, 사용자의 안전을 위해 외부적 배선을 사용하지 않아 안전성 향상</span>
+      </li>
+      <li style="margin-bottom:6px;"><strong>강화 절연 (Reinforced Isolation)</strong> : 단일층으로 이중절연과 같은 효과. 강화절연을 사용한 디바이스는 기본절연 기능과 함께 PCB 트레이, 코어, 권선, 핀 간 물리적 간격을 확보하면서도 안전을 위한 연면거리와 간격(2개의 전압 시스템 간 물리적인 거리)을 충족할 수 있도록 설계</li>
+    </ol>
+
+    <!-- ELV -->
+    <div class="sub-title">누설전류의 발생 (ELV 계통)</div>
+    <p>특별 저압(extra low voltage : 2차 전압이 <span class="red">AC 50 [V], DC 120 [V] 이하</span>로 SELV (비접지 회로 구성) 및 PELV (접지회로 구성)은 1차와 2차가 전기적으로 절연된 회로, FELV는 1차와 2차가 전기적으로 절연되지 않은 회로</p>
+
+    <div class="sub-sub-title">ELV 계통을 사용하는 이유</div>
+    <ol>
+      <li>접촉 전압 AC 50V 이하 : 인체 감전으로 부터 안전 전압 확보</li>
+      <li>Energy Saving : 전력 사용량 및 Cable 원자재 비용 절감</li>
+      <li>적용 Application : CCTV, LAN SYSTEM, 신호등과 같은 제어 System 등</li>
+    </ol>
+
+    <ul style="margin-top:10px;">
+      <li><strong>SELV (Safety Extra-Low Voltage – 안전특별저압)</strong> : 교류 50 [V] 직류 120 [V] 이하의 비접지 회로</li>
+      <li><strong>PELV (Protective Extra-Low Voltage – 보호특별저압)</strong> : 교류 50 [V] 직류 120 [V]로 1차 고장이 보호 접지 도체를 통해 2차 전압을 교류 50 [V], WLRFB 120 [V] 이하로 유지시켜 주는 시스템</li>
+      <li><strong>FELV (Functional Extra-Low Voltage – 기능적 특별저압)</strong> : 혼촉이나 1차 고장이 2차에 전파되므로 변압기 1차에 누전 차단기를 설치하여야 한다.</li>
+    </ul>
+
+    <!-- 수변전 설비 구성도 -->
+    <div class="sub-title">수변전 설비의 구성도</div>
+    <div class="table-wrap"><table>
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>주요 기기</th>
+          <th>세부 내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="3"><strong>수전설비</strong></td>
+          <td>인입관련 기기</td>
+          <td>책임 분계점 / 개폐기 (LBS, ASS, AISS) / 피뢰기 (LA)</td>
+        </tr>
+        <tr>
+          <td>특고압 수전반</td>
+          <td>차단 장치 : 전력 퓨즈 (P.F) / 계기용 변성기 : MOF – 전력량계 / 차단장치 : 진공차단기 (VCB)</td>
+        </tr>
+        <tr>
+          <td>전력용 변압기</td>
+          <td>CT / PT / 보호장치 : 계전기 (아날로그, 디지털) / <span class="red">과전류계전기, 지락과전류 계전기</span>, 과전압 계전기, 부족전압 계전기 등 / COS 설치 / 몰드 변압기의 경우 1차측 SA 설치 필요</td>
+        </tr>
+        <tr>
+          <td><strong>변전설비</strong></td>
+          <td>저압 CB 류</td>
+          <td>저압 기기 : ACB / ATS (비상발전기) / MCCB / ELCB / MC / EOCR (THR)</td>
+        </tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- ======================== SECTION 3 ======================== -->
+  <div class="section">
+    <div class="section-title">3. 개폐장치의 종류</div>
+
+    <div class="sub-title">차단기 (CB : Circuit Breaker)</div>
+
+    <div class="sub-sub-title">차단기의 개요</div>
+    <div class="highlight-box">
+      <p>■ <strong>차단기 책무</strong> : 단락 사고 시 대전류로 부터 전선과 부하기기의 손상을 막는 것.</p>
+    </div>
+    <div class="highlight-box">
+      <p>■ <strong>한류 차단</strong> : Arc 전압을 높여, 단락 전류를 작게 억제하여 단시간에 차단.</p>
+    </div>
+    <div class="highlight-box">
+      <p>■ <strong>Arc 습착</strong> : 단락 차단 시 접점간 발생하는 Arc가 접점면에 잔유하는 성질. Arc 전압을 낮추는 역할을 함.</p>
+    </div>
+    <div class="highlight-box">
+      <p>■ <strong>Arc 전압 상승 방법</strong> : 접점의 개리 속도. Arc 구동 자장 [磁場].</p>
+    </div>
+    <div class="highlight-box">
+      <p>■ <strong>AF [Ampere Frame]</strong> : 같은 형명으로 제작할 수 있는 최대정격 전류로 제품의 크기를 결정한다. AF은 정격 사용 전압, 절연 성능, 온도 상승, 정격 차단 용량 등 차단기의 기능과 관련된 동작 기구를 같은 치수의 크기에 넣을 수 있는 최대 정격전류값을 갖는 용기의 크기라고 규정함.</p>
+    </div>
+    <div class="highlight-box">
+      <p>■ <strong>AT [Ampere Trip]</strong>은 과전류 트립의 기준치로 정격 사용 전류</p>
+    </div>
+
+    <div class="sub-sub-title">저압 차단기 아크 소호 기술 — 재기 전압</div>
+    <div class="highlight-box" style="border-color:#cc0000; background:#fff5f5;">
+      <p>■ <strong>재기 전압</strong> : 차단기, 개폐기 등의 한 극을 차단한 직후 그 극의 양 단자 사이 혹은 극의 각 차단점 사이에 나타나는 과도 전압. <span class="red">역률이 낮으면 더욱 차단하기 어려워 진다.</span></p>
+    </div>
+    <p>재기 전압 관련 그래프 설명:</p>
+    <ul>
+      <li><strong>성공적 차단 시</strong> : 절연회복특성이 재기전압보다 높아 차단 성공</li>
+      <li><strong>차단 실패 시</strong> : 재기전압이 절연회복특성을 초과하여 절연파괴 발생</li>
+    </ul>
+
+    <div class="sub-sub-title">차단기 용어 정리</div>
+    <ul>
+      <li><strong>정격 사용 전압 [Rated Operational Voltage]</strong> : 정격 전류와 결합하여 장비의 용도를 결정하고 관련 시험과 범위가 있는 전압 값 (계통의 최고전압)</li>
+      <li><strong>정격 절연 전압 [Rated Insulation Voltage]</strong> : 유전체 시험 전압과 연면 거리 전압값, 어떠한 경우에도 정격 작동 전압의 최대값은 정격 절연 전압의 최대값을 초과할 수 없다.</li>
+      <li><strong>정격 임펄스 내전압 [Rated Impulse Withstand Voltage]</strong> : 장비의 규정된 형태와 극성을 갖는 임펄스 전압의 첨두치는 규정된 시험 조건에서 사고 없이 견딜 수 있어야 한다. 정격 임펄스 내전압은 장비가 설치된 회로의 과도 과전압치 이상이 되어야 한다.</li>
+      <li><strong>정격 전류 [Rated Operational Current]</strong> : 차단기에 대하여 정격 전류는 정격 연속 전류(Iu), 규정된 대기 노출 열 전류(Ith)와 동일하다.</li>
+      <li><strong>정격 극한 단락 차단 용량 [Rated Ultimate Short-circuit Capacity]</strong> : 동일한 정격 사용 전압에서 제조자가 차단기에 지정한 최대 단락 차단 용량값. 예상된 차단 전류로서 kA</li>
+      <li><strong>서비스 단락 차단 용량 [Service Short-circuit Breaking Capacity]</strong> : 제작자가 보증하는 최소 단락 전류의 값</li>
+    </ul>
+  </div>
+
+  <footer>개폐장치 유지보수 실습 강의 자료 — 내용 추출본</footer>
+</div>
+</body>
+</html>
